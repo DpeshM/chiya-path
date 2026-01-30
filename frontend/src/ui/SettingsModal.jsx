@@ -41,10 +41,10 @@ const SettingsModal = ({
       return;
     }
     try {
-      await createTable({ number: tableNum, status: 'vacant', orders: [], seats: 4 });
+      await createTable({ number: tableNum, status: 'vacant', orders: [] });
       setNewTableNumber('');
       await loadAll?.();
-      await handleSyncToGoogle('tables', [...tables, { number: tableNum, status: 'vacant', orders: [], seats: 4 }]);
+      await handleSyncToGoogle('tables', [...tables, { number: tableNum, status: 'vacant', orders: [] }]);
       alert(`Table ${tableNum} added successfully`);
     } catch (err) {
       console.error('Failed to add table:', err);
@@ -126,13 +126,13 @@ const SettingsModal = ({
   if (!showSettings) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
-        <div className="bg-orange-600 text-white p-6 flex justify-between items-center">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+        <div className="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-6 flex justify-between items-center rounded-t-2xl">
           <h2 className="text-2xl font-bold">Settings</h2>
           <button
             onClick={() => setShowSettings(false)}
-            className="p-2 hover:bg-orange-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-amber-700 rounded-xl transition-colors"
           >
             <X size={24} />
           </button>
@@ -143,8 +143,8 @@ const SettingsModal = ({
             onClick={() => setSettingsTab('sheets')}
             className={`px-6 py-3 font-semibold transition-colors ${
               settingsTab === 'sheets'
-                ? 'bg-orange-100 text-orange-600 border-b-2 border-orange-600'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-amber-100 text-amber-700 border-b-2 border-amber-600'
+                : 'text-stone-600 hover:bg-stone-100'
             }`}
           >
             Google Sheets
@@ -153,8 +153,8 @@ const SettingsModal = ({
             onClick={() => setSettingsTab('tables')}
             className={`px-6 py-3 font-semibold transition-colors ${
               settingsTab === 'tables'
-                ? 'bg-orange-100 text-orange-600 border-b-2 border-orange-600'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-amber-100 text-amber-700 border-b-2 border-amber-600'
+                : 'text-stone-600 hover:bg-stone-100'
             }`}
           >
             Manage Tables
@@ -163,8 +163,8 @@ const SettingsModal = ({
             onClick={() => setSettingsTab('menu')}
             className={`px-6 py-3 font-semibold transition-colors ${
               settingsTab === 'menu'
-                ? 'bg-orange-100 text-orange-600 border-b-2 border-orange-600'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-amber-100 text-amber-700 border-b-2 border-amber-600'
+                : 'text-stone-600 hover:bg-stone-100'
             }`}
           >
             Manage Menu
@@ -190,7 +190,7 @@ const SettingsModal = ({
                     setSheetConfig({ ...sheetConfig, scriptUrl: e.target.value, isConfigured: false })
                   }
                   placeholder="https://script.google.com/macros/s/.../exec"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                 />
               </div>
 
@@ -266,11 +266,11 @@ const SettingsModal = ({
                     value={newTableNumber}
                     onChange={(e) => setNewTableNumber(e.target.value)}
                     placeholder="Enter table number"
-                    className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                    className="flex-1 px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:outline-none"
                   />
                   <button
                     onClick={addTable}
-                    className="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors"
+                    className="px-6 py-3 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700 transition-colors"
                   >
                     <Plus size={20} className="inline mr-2" />
                     Add Table
@@ -286,8 +286,8 @@ const SettingsModal = ({
                       key={table.number}
                       className={`p-4 rounded-lg border-2 ${
                         table.status === 'occupied'
-                          ? 'border-orange-500 bg-orange-50'
-                          : 'border-gray-300 bg-white'
+                          ? 'border-amber-500 bg-amber-50'
+                          : 'border-stone-200 bg-white'
                       }`}
                     >
                       <div className="flex justify-between items-center mb-2">
@@ -295,8 +295,8 @@ const SettingsModal = ({
                         <span
                           className={`text-xs px-2 py-1 rounded ${
                             table.status === 'occupied'
-                              ? 'bg-orange-600 text-white'
-                              : 'bg-gray-200 text-gray-700'
+                              ? 'bg-amber-600 text-white'
+                              : 'bg-stone-200 text-stone-700'
                           }`}
                         >
                           {table.status}
@@ -322,7 +322,7 @@ const SettingsModal = ({
               <div className="mb-6">
                 <button
                   onClick={() => setShowAddMenuItem(true)}
-                  className="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors"
+                  className="px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
                 >
                   <Plus size={20} className="inline mr-2" />
                   Add Menu Item
@@ -330,7 +330,7 @@ const SettingsModal = ({
               </div>
 
               {showAddMenuItem && (
-                <div className="mb-6 p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
+                <div className="mb-6 p-4 bg-amber-50 border-2 border-amber-500 rounded-xl">
                   <h3 className="text-lg font-bold text-black mb-4">New Menu Item</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <input
@@ -338,7 +338,7 @@ const SettingsModal = ({
                       value={newMenuItem.name}
                       onChange={(e) => setNewMenuItem({ ...newMenuItem, name: e.target.value })}
                       placeholder="Item name"
-                      className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                      className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                     />
                     <input
                       type="number"
@@ -346,12 +346,12 @@ const SettingsModal = ({
                       value={newMenuItem.price}
                       onChange={(e) => setNewMenuItem({ ...newMenuItem, price: e.target.value })}
                       placeholder="Price"
-                      className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                      className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                     />
                     <select
                       value={newMenuItem.category}
                       onChange={(e) => setNewMenuItem({ ...newMenuItem, category: e.target.value })}
-                      className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                      className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                     >
                       <option value="Main">Main</option>
                       <option value="Starter">Starter</option>
@@ -388,7 +388,7 @@ const SettingsModal = ({
                         setEditingMenuItem({ ...editingMenuItem, name: e.target.value })
                       }
                       placeholder="Item name"
-                      className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                      className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                     />
                     <input
                       type="number"
@@ -398,14 +398,14 @@ const SettingsModal = ({
                         setEditingMenuItem({ ...editingMenuItem, price: e.target.value })
                       }
                       placeholder="Price"
-                      className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                      className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                     />
                     <select
                       value={editingMenuItem.category}
                       onChange={(e) =>
                         setEditingMenuItem({ ...editingMenuItem, category: e.target.value })
                       }
-                      className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none"
+                      className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
                     >
                       <option value="Main">Main</option>
                       <option value="Starter">Starter</option>
@@ -435,7 +435,7 @@ const SettingsModal = ({
                 <h3 className="text-xl font-bold text-black mb-4">Menu Items</h3>
                 {Object.entries(groupByCategory(menuItems)).map(([category, items]) => (
                   <div key={category} className="mb-6">
-                    <h4 className="text-lg font-semibold text-black mb-3 border-b-2 border-orange-500 pb-2">
+                    <h4 className="text-lg font-semibold text-stone-800 mb-3 border-b-2 border-amber-500 pb-2">
                       {category}
                     </h4>
                     <div className="space-y-2">
@@ -446,7 +446,7 @@ const SettingsModal = ({
                         >
                           <div className="flex-1">
                             <span className="font-medium text-black">{item.name}</span>
-                            <span className="text-orange-600 font-semibold ml-4">
+                            <span className="text-amber-600 font-semibold ml-4">
                               Rs.{item.price.toFixed(2)}
                             </span>
                           </div>

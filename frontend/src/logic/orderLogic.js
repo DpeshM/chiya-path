@@ -20,10 +20,9 @@ export const removeItemFromOrder = (currentOrder, itemId) => {
   return currentOrder.filter((i) => i.id !== itemId);
 };
 
-export const buildKitchenOrder = (tableNumber, seatNumber, items) => ({
+export const buildKitchenOrder = (tableNumber, items) => ({
   id: Date.now(),
   tableNumber,
-  seatNumber: seatNumber ?? null,
   items,
   status: 'pending',
   timestamp: new Date().toLocaleTimeString(),

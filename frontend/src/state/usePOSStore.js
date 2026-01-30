@@ -15,7 +15,6 @@ export const usePOSStore = () => {
   const [tables, setTables] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
   const [selectedTable, setSelectedTable] = useState(null);
-  const [selectedSeat, setSelectedSeat] = useState(null);
   const [currentOrder, setCurrentOrder] = useState([]);
   const [kitchenOrders, setKitchenOrders] = useState([]);
   const [useBackend, setUseBackend] = useState(true);
@@ -82,8 +81,6 @@ export const usePOSStore = () => {
     setMenuItems,
     selectedTable,
     setSelectedTable,
-    selectedSeat,
-    setSelectedSeat,
     currentOrder,
     setCurrentOrder,
     kitchenOrders,

@@ -10,10 +10,8 @@ const WaiterTab = ({
   tables,
   menuItems,
   selectedTable,
-  selectedSeat,
   currentOrder,
   setSelectedTable,
-  setSelectedSeat,
   setCurrentOrder,
   setKitchenOrders,
   setTables,
@@ -47,7 +45,6 @@ const WaiterTab = ({
       try {
         await createOrder({
           tableNumber: selectedTable,
-          seatNumber: selectedSeat ?? null,
           items: currentOrder,
         });
         await updateTableByNumber(selectedTable, {
@@ -61,7 +58,7 @@ const WaiterTab = ({
         return;
       }
     } else {
-      const newKitchenOrder = buildKitchenOrder(selectedTable, selectedSeat, currentOrder);
+      const newKitchenOrder = buildKitchenOrder(selectedTable, currentOrder);
       setKitchenOrders((prev) => [...prev, newKitchenOrder]);
       setTables(
         tables.map((t) =>
@@ -72,11 +69,8 @@ const WaiterTab = ({
       );
     }
 
-    alert(
-      `Order submitted to kitchen for Table ${selectedTable}${selectedSeat ? ` Seat ${selectedSeat}` : ''}`
-    );
+    alert(`Order submitted to kitchen for Table ${selectedTable}`);
     setSelectedTable(null);
-    setSelectedSeat(null);
     setCurrentOrder([]);
   };
 
@@ -84,28 +78,24 @@ const WaiterTab = ({
     <div>
       {!selectedTable ? (
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-black px-2">
-            Select a Table & Seat
-          </h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-stone-800">Select a Table</h2>
+          <p className="text-stone-500 mb-6">Click a table to take an order</p>
           <TableGrid
             tables={tables}
             onSelectTable={setSelectedTable}
-            onSelectSeat={setSelectedSeat}
             onCheckout={proceedToCheckout}
             calculateTotal={calculateTotal}
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <MenuGrid
               menuItems={menuItems}
               selectedTable={selectedTable}
-              selectedSeat={selectedSeat}
               onAddItem={handleAddItem}
               onBack={() => {
                 setSelectedTable(null);
-                setSelectedSeat(null);
                 setCurrentOrder([]);
               }}
               groupByCategory={groupByCategory}
@@ -114,7 +104,6 @@ const WaiterTab = ({
           <div className="lg:col-span-1">
             <OrderSummary
               selectedTable={selectedTable}
-              selectedSeat={selectedSeat}
               currentOrder={currentOrder}
               onUpdateQuantity={handleUpdateQuantity}
               onRemoveItem={handleRemoveItem}

@@ -3,7 +3,6 @@ import { Plus, Minus, Trash2 } from 'lucide-react';
 
 const OrderSummary = ({
   selectedTable,
-  selectedSeat,
   currentOrder,
   onUpdateQuantity,
   onRemoveItem,
@@ -11,49 +10,44 @@ const OrderSummary = ({
   calculateTotal,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:sticky lg:top-8 border-2 border-orange-500">
-      <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-black">Current Order</h2>
-      <div className="mb-3 sm:mb-4 p-3 bg-orange-100 rounded-lg border border-orange-500">
-        <p className="text-base sm:text-lg font-semibold text-black">
-          Table {selectedTable}
-          {selectedSeat != null && <span className="text-orange-600"> - Seat {selectedSeat}</span>}
-        </p>
+    <div className="bg-white rounded-2xl shadow-md p-6 lg:sticky lg:top-8 border border-stone-200">
+      <h2 className="text-xl font-bold mb-4 text-stone-800">Current Order</h2>
+      <div className="mb-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
+        <p className="text-lg font-semibold text-stone-800">Table {selectedTable}</p>
       </div>
 
-      <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 max-h-64 sm:max-h-96 overflow-y-auto">
+      <div className="space-y-2 mb-4 max-h-64 sm:max-h-96 overflow-y-auto">
         {currentOrder.length === 0 ? (
-          <p className="text-gray-500 text-center py-6 sm:py-8 text-sm sm:text-base">No items added</p>
+          <p className="text-stone-500 text-center py-8 text-sm">No items added yet</p>
         ) : (
           currentOrder.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded-lg border border-gray-300"
+              className="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-200"
             >
-              <div className="flex-1 min-w-0 mr-2">
-                <p className="font-medium text-black text-sm sm:text-base truncate">{item.name}</p>
-                <p className="text-xs sm:text-sm text-gray-600">Rs.{item.price.toFixed(2)} each</p>
+              <div className="flex-1 min-w-0 mr-3">
+                <p className="font-medium text-stone-800 truncate">{item.name}</p>
+                <p className="text-xs text-stone-500">Rs.{item.price.toFixed(2)} each</p>
               </div>
-              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={() => onUpdateQuantity(item.id, -1)}
-                  className="p-1 bg-gray-200 rounded hover:bg-gray-300"
+                  className="p-1.5 bg-stone-200 rounded-lg hover:bg-stone-300 text-stone-700"
                 >
-                  <Minus size={14} className="sm:w-4 sm:h-4" />
+                  <Minus size={14} />
                 </button>
-                <span className="font-semibold w-6 sm:w-8 text-center text-black text-sm sm:text-base">
-                  {item.quantity}
-                </span>
+                <span className="font-semibold w-8 text-center text-stone-800">{item.quantity}</span>
                 <button
                   onClick={() => onUpdateQuantity(item.id, 1)}
-                  className="p-1 bg-gray-200 rounded hover:bg-gray-300"
+                  className="p-1.5 bg-stone-200 rounded-lg hover:bg-stone-300 text-stone-700"
                 >
-                  <Plus size={14} className="sm:w-4 sm:h-4" />
+                  <Plus size={14} />
                 </button>
                 <button
                   onClick={() => onRemoveItem(item.id)}
-                  className="p-1 bg-orange-100 text-orange-600 rounded hover:bg-orange-200 ml-1"
+                  className="p-1.5 bg-red-100 rounded-lg hover:bg-red-200 text-red-600"
                 >
-                  <Trash2 size={14} className="sm:w-4 sm:h-4" />
+                  <Trash2 size={14} />
                 </button>
               </div>
             </div>
@@ -62,16 +56,16 @@ const OrderSummary = ({
       </div>
 
       {currentOrder.length > 0 && (
-        <div className="border-t-2 border-orange-500 pt-3 sm:pt-4">
-          <div className="flex justify-between text-lg sm:text-xl font-bold mb-3 sm:mb-4">
-            <span className="text-black">Total:</span>
-            <span className="text-orange-600">Rs.{calculateTotal(currentOrder).toFixed(2)}</span>
+        <div className="border-t border-stone-200 pt-4">
+          <div className="flex justify-between text-lg font-bold mb-4">
+            <span className="text-stone-800">Total</span>
+            <span className="text-amber-600">Rs.{calculateTotal(currentOrder).toFixed(2)}</span>
           </div>
           <button
             onClick={onSubmitOrder}
-            className="w-full bg-orange-600 text-white py-2 sm:py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors text-sm sm:text-base"
+            className="w-full bg-amber-600 text-white py-3 rounded-xl font-semibold hover:bg-amber-700 transition-colors"
           >
-            Submit Order to Kitchen
+            Submit to Kitchen
           </button>
         </div>
       )}

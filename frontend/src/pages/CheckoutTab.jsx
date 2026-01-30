@@ -62,9 +62,12 @@ const CheckoutTab = ({
     setQrAmount('');
   };
 
+  const occupiedTables = tables.filter((t) => t.status === 'occupied');
+
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 border-2 border-orange-500">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-black">Checkout</h2>
+    <div className="bg-white rounded-2xl shadow-md p-6 border border-stone-200">
+      <h2 className="text-2xl font-bold mb-2 text-stone-800">Checkout</h2>
+      <p className="text-stone-500 mb-6">Select a table to process payment</p>
 
       {selectedTable ? (
         <PaymentForm
@@ -87,31 +90,25 @@ const CheckoutTab = ({
         />
       ) : (
         <div>
-          <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-black">
-            Select a table to checkout
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
-            {tables
-              .filter((t) => t.status === 'occupied')
-              .map((table) => (
-                <button
-                  key={table.number}
-                  onClick={() => setSelectedTable(table.number)}
-                  className="p-4 sm:p-8 rounded-lg shadow-lg font-bold text-xl sm:text-2xl transition-all transform hover:scale-105 bg-orange-600 text-white hover:bg-orange-700 border-4 border-black"
-                >
-                  <div className="text-center">
-                    <div className="text-2xl sm:text-4xl mb-1 sm:mb-2">Table {table.number}</div>
-                    <div className="text-xs sm:text-sm font-normal">
-                      Rs.{calculateTotal(table.orders || []).toFixed(2)}
-                    </div>
+          <h3 className="text-lg font-semibold mb-4 text-stone-700">Select a table to checkout</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {occupiedTables.map((table) => (
+              <button
+                key={table.number}
+                onClick={() => setSelectedTable(table.number)}
+                className="p-6 rounded-2xl font-bold text-xl bg-amber-600 text-white hover:bg-amber-700 transition-all shadow-md hover:shadow-lg"
+              >
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl mb-1">Table {table.number}</div>
+                  <div className="text-sm font-normal opacity-90">
+                    Rs.{calculateTotal(table.orders || []).toFixed(2)}
                   </div>
-                </button>
-              ))}
+                </div>
+              </button>
+            ))}
           </div>
-          {tables.filter((t) => t.status === 'occupied').length === 0 && (
-            <p className="text-gray-500 text-center py-8 sm:py-12 text-sm sm:text-base">
-              No occupied tables
-            </p>
+          {occupiedTables.length === 0 && (
+            <p className="text-stone-500 text-center py-12">No occupied tables</p>
           )}
         </div>
       )}

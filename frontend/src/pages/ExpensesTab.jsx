@@ -57,28 +57,31 @@ const ExpensesTab = ({
   const netProfit = totalSales - totalExpenses;
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 border-2 border-orange-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 sm:mb-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-black">Daily Expenses</h2>
+    <div className="bg-white rounded-2xl shadow-md p-6 border border-stone-200">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-stone-800">Daily Expenses</h2>
+          <p className="text-stone-500 mt-0.5">Track costs and profit</p>
+        </div>
         <button
           onClick={() => setShowAddExpense(!showAddExpense)}
-          className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors text-sm sm:text-base"
+          className="flex items-center gap-2 w-full sm:w-auto px-5 py-2.5 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700 transition-colors"
         >
-          <Plus size={16} className="inline mr-2 sm:w-5 sm:h-5" />
+          <Plus size={18} />
           Add Expense
         </button>
       </div>
 
       {showAddExpense && (
-        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
-          <h3 className="text-base sm:text-lg font-bold text-black mb-3 sm:mb-4">New Expense</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="mb-6 p-4 bg-amber-50 border-2 border-amber-200 rounded-xl">
+          <h3 className="text-lg font-bold text-stone-800 mb-4">New Expense</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <input
               type="text"
               value={newExpense.description}
               onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })}
               placeholder="Description"
-              className="px-3 sm:px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-sm sm:text-base"
+              className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
             />
             <input
               type="number"
@@ -86,12 +89,12 @@ const ExpensesTab = ({
               value={newExpense.amount}
               onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
               placeholder="Amount (Rs.)"
-              className="px-3 sm:px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-sm sm:text-base"
+              className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
             />
             <select
               value={newExpense.category}
               onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })}
-              className="px-3 sm:px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-sm sm:text-base"
+              className="px-4 py-2 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none"
             >
               <option value="Food Supplies">Food Supplies</option>
               <option value="Utilities">Utilities</option>
@@ -102,10 +105,10 @@ const ExpensesTab = ({
               <option value="Other">Other</option>
             </select>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-3 sm:mt-4">
+          <div className="flex gap-3 mt-4">
             <button
               onClick={addExpense}
-              className="px-4 sm:px-6 py-2 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors text-sm sm:text-base"
+              className="px-6 py-2 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700 transition-colors"
             >
               Add Expense
             </button>
@@ -114,7 +117,7 @@ const ExpensesTab = ({
                 setShowAddExpense(false);
                 setNewExpense({ description: '', amount: '', category: 'Food Supplies' });
               }}
-              className="px-4 sm:px-6 py-2 bg-gray-300 text-black rounded-lg font-semibold hover:bg-gray-400 transition-colors text-sm sm:text-base"
+              className="px-6 py-2 bg-stone-200 text-stone-700 rounded-xl font-semibold hover:bg-stone-300 transition-colors"
             >
               Cancel
             </button>
@@ -122,48 +125,46 @@ const ExpensesTab = ({
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
-        <div className="p-3 sm:p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
-          <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Expenses</p>
-          <p className="text-xl sm:text-2xl font-bold text-orange-600">Rs.{totalExpenses.toFixed(2)}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div className="p-4 bg-amber-50 border-2 border-amber-200 rounded-xl">
+          <p className="text-sm text-stone-600 mb-1">Total Expenses</p>
+          <p className="text-xl font-bold text-amber-600">Rs.{totalExpenses.toFixed(2)}</p>
         </div>
-        <div className="p-3 sm:p-4 bg-green-50 border-2 border-green-500 rounded-lg">
-          <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Sales</p>
-          <p className="text-xl sm:text-2xl font-bold text-green-600">Rs.{totalSales.toFixed(2)}</p>
+        <div className="p-4 bg-emerald-50 border-2 border-emerald-200 rounded-xl">
+          <p className="text-sm text-stone-600 mb-1">Total Sales</p>
+          <p className="text-xl font-bold text-emerald-600">Rs.{totalSales.toFixed(2)}</p>
         </div>
-        <div className="p-3 sm:p-4 bg-blue-50 border-2 border-blue-500 rounded-lg">
-          <p className="text-xs sm:text-sm text-gray-600 mb-1">Net Profit</p>
-          <p className="text-xl sm:text-2xl font-bold text-blue-600">Rs.{netProfit.toFixed(2)}</p>
+        <div className="p-4 bg-teal-50 border-2 border-teal-200 rounded-xl">
+          <p className="text-sm text-stone-600 mb-1">Net Profit</p>
+          <p className="text-xl font-bold text-teal-600">Rs.{netProfit.toFixed(2)}</p>
         </div>
       </div>
 
       {expenses.length === 0 ? (
-        <p className="text-gray-500 text-center py-8 sm:py-12 text-base sm:text-lg">
-          No expenses recorded
-        </p>
+        <p className="text-stone-500 text-center py-12">No expenses recorded</p>
       ) : (
-        <div className="space-y-2 sm:space-y-3">
-          <h3 className="text-lg sm:text-xl font-bold text-black mb-3 sm:mb-4">Today's Expenses</h3>
+        <div className="space-y-3">
+          <h3 className="text-lg font-bold text-stone-800 mb-4">Today&apos;s Expenses</h3>
           {expenses.map((expense) => (
             <div
               key={expense.id}
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-300"
+              className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 p-4 bg-stone-50 rounded-xl border border-stone-200"
             >
-              <div className="flex-1 min-w-0 w-full sm:w-auto">
-                <p className="font-semibold text-black text-sm sm:text-base">{expense.description}</p>
-                <p className="text-xs sm:text-sm text-gray-600">
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-stone-800">{expense.description}</p>
+                <p className="text-sm text-stone-500">
                   {expense.category} • {expense.date} • {expense.timestamp}
                 </p>
               </div>
-              <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                <span className="text-lg sm:text-xl font-bold text-orange-600">
+              <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                <span className="text-lg font-bold text-amber-600">
                   Rs.{expense.amount.toFixed(2)}
                 </span>
                 <button
                   onClick={() => deleteExpenseHandler(expense.id)}
-                  className="p-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors flex-shrink-0"
+                  className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
                 >
-                  <Trash2 size={14} className="sm:w-4 sm:h-4" />
+                  <Trash2 size={16} />
                 </button>
               </div>
             </div>

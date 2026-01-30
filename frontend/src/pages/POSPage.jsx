@@ -19,10 +19,8 @@ const POSPage = () => {
     tables,
     menuItems,
     selectedTable,
-    selectedSeat,
     currentOrder,
     setSelectedTable,
-    setSelectedSeat,
     setCurrentOrder,
     kitchenOrders,
     setKitchenOrders,
@@ -83,10 +81,8 @@ const POSPage = () => {
             tables={tables}
             menuItems={menuItems}
             selectedTable={selectedTable}
-            selectedSeat={selectedSeat}
             currentOrder={currentOrder}
             setSelectedTable={setSelectedTable}
-            setSelectedSeat={setSelectedSeat}
             setCurrentOrder={setCurrentOrder}
             setKitchenOrders={setKitchenOrders}
             setTables={setTables}
@@ -139,20 +135,20 @@ const POSPage = () => {
 
   if (loadError) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-8">
-        <div className="text-center max-w-md">
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center p-8">
+        <div className="text-center max-w-md bg-white rounded-2xl shadow-lg p-8 border border-stone-200">
           <h2 className="text-xl font-bold text-red-600 mb-4">Cannot connect to server</h2>
-          <p className="text-gray-600 mb-4">{loadError}</p>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-stone-600 mb-4">{loadError}</p>
+          <p className="text-sm text-stone-500 mb-4">
             Make sure MongoDB is running and the backend is started:
           </p>
-          <p className="text-sm font-mono bg-gray-100 p-2 rounded mb-4">
+          <p className="text-sm font-mono bg-stone-100 p-2 rounded mb-4">
             mongod<br />
             npm run dev --prefix backend
           </p>
           <button
             onClick={loadAll}
-            className="px-6 py-2 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700"
+            className="px-6 py-2 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700"
           >
             Retry
           </button>
@@ -163,17 +159,17 @@ const POSPage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
+          <p className="text-stone-600">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-stone-50">
       <Navigation
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -200,7 +196,7 @@ const POSPage = () => {
         loadAll={loadAll}
       />
 
-      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">{renderTab()}</div>
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">{renderTab()}</div>
     </div>
   );
 };
